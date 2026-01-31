@@ -16,7 +16,7 @@ export default function Home() {
             </p>
             <div className="items-center gap-4 flex flex-col">
               <Link href="/sign-up" className="w-full sm:w-auto">
-                <Button size="lg" className="h-12 px-8 font-medium">
+                <Button  size="lg" className="h-12 px-8 font-medium cursor-pointer">
                   Start for free <ArrowRight className="ml-2" />
                 </Button>
               </Link>

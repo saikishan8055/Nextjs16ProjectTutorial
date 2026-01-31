@@ -12,17 +12,17 @@ export default function ImageTabs(){
      <section className="border-t bg-white py-16">
           <div className="container px-4 mx-auto">
             <div className="mx-auto max-w-6xl">
-              <div className="flex gap-2 justify-center mb-8">
+              <div className="flex gap-2 justify-center mb-8 ">
                 <Button onClick={()=>setActiveTab("organize")}
-                  className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors 
+                  className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors cursor-pointer 
                     ${activeTab === 'organize'? "bg-primary text-white":"bg-gray-200 text-gray-700 hover:bg-gray-200" }`}
                   
                   > Organize Application</Button>
                 <Button onClick={()=>setActiveTab("hired")}
-                   className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors 
+                   className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors cursor-pointer
                     ${activeTab === 'hired'? "bg-primary text-white":"bg-gray-200 text-gray-700 hover:bg-gray-200" }`}>Get Hired</Button>
                 <Button onClick={()=>setActiveTab("boards")} 
-                   className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors 
+                   className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors cursor-pointer
                     ${activeTab === 'boards'? "bg-primary text-white":"bg-gray-200 text-gray-700 hover:bg-gray-200" }`}>Manage Boards</Button>
               </div>
               <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border border-gray-200 shadow-xl">
