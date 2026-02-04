@@ -38,3 +38,4 @@ try {
 return cached.conn
 
  }
+ export default connectDB;
