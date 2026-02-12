@@ -1,48 +1,119 @@
-"use client"
+"use client";
 
-import { Board } from "@/lib/models/models.types"
-import { Award, Calendar, CheckCircle2, Mic, XCircle } from "lucide-react";
+import { Board, Column } from "@/lib/models/models.types";
+import {
+  Award,
+  Calendar,
+  CheckCircle2,
+  Key,
+  Mic,
+  MoreVertical,
+  Trash2,
+  XCircle,
+} from "lucide-react";
 import React from "react";
+import { Card, CardHeader, CardTitle } from "./ui/card";
+// import {  } from "@radix-ui/react-dropdown-menu";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 interface KanBoardProps {
-    board :Board ,
-    userId: string,
+  board: Board;
+  userId: string;
+}
+interface ColConfig {
+  color: string;
+  icon: React.ReactNode;
 }
 
-const COLUMN_CONFIG :Array<{color : string; icon:React.ReactNode}>=[
-    {
-color:'bg-cyan-500',
-icon :<Calendar className="h-4 w-14"/>
-    },
-    {
-            color:'bg-purple-500',
-            icon:<CheckCircle2 className="h-4 w-4"/>
-     },
-     {
-        color:'bg-green-400',
-        icon:<Mic className="h-4 w-4"/>
-     },
-     {
-        color:'bg-yellow-500',
-        icon:<Award className="h-4 w-4"/>
-     },
-     {
-        color:'bg-red-500',
-        icon:<XCircle className="h-5 w-5"/>
-     }
-
-]
-
-
-
-export function  KanbanBoard({board,userId}:KanBoardProps){
-    
-    return <>
-    <div>
+const COLUMN_CONFIG: Array<{ color: string; icon: React.ReactNode }> = [
+  {
+    color: "bg-cyan-500",
+    icon: <Calendar className="h-4 w-14" />,
+  },
+  {
+    color: "bg-purple-500",
+    icon: <CheckCircle2 className="h-4 w-4" />,
+  },
+  {
+    color: "bg-green-400",
+    icon: <Mic className="h-4 w-4" />,
+  },
+  {
+    color: "bg-yellow-500",
+    icon: <Award className="h-4 w-4" />,
+  },
+  {
+    color: "bg-red-500",
+    icon: <XCircle className="h-5 w-5" />,
+  },
+];
+function DropableColumn({
+  column,
+  config,
+  boardId,
+}: {
+  column: Column;
+  config: ColConfig;
+  boardId: string;
+}) {
+  return (
+    <Card >
+      <CardHeader className={`${config.color}`}>
         <div>
-
+          <div>
+            {config.icon}
+            <CardTitle>{column.name}</CardTitle>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button variant="ghost">
+                  <MoreVertical />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Trash2 />
+                  Delete Column
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-    </div>
-    </>
+      </CardHeader>
+    </Card>
+  );
+}
 
+export function KanbanBoard({ board, userId }: KanBoardProps) {
+  const columns = board.columns;
+
+  return (
+    <>
+      <div>
+        <div>
+          {columns.map((col, key) => {
+            const config = COLUMN_CONFIG[key] || {
+              color: "bg-gray-500",
+              icon: <Calendar className="h-4 w-4" />,
+            };
+            return (
+              <>
+                <DropableColumn
+                  key={key}
+                  column={col}
+                  config={config}
+                  boardId={board._id}
+                />
+              </>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
 }

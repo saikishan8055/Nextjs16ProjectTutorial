@@ -15,6 +15,8 @@ export default async  function dashBoard(){
    const board =  await Board.findOne({
         userId : session.user.id,
         name : 'Job Hunt',
+    }).populate({
+        path :'columns',
     })
     console.log(board)
 
@@ -26,7 +28,7 @@ export default async  function dashBoard(){
                     <h1 className="text-black text-3xl font-bold">{board.name}</h1>
                     <p className="text-gray-600">Track Your Job Application</p>
                 </div>
-                <KanbanBoard board={board} userId={session.user.id}/>
+                <KanbanBoard board={JSON.parse(JSON.stringify (board))} userId={session.user.id}/>
             </div>
         </div>
     )
